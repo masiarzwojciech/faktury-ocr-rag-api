@@ -1,0 +1,44 @@
+# Środowisko wirtualne — nie kopiujemy do kontenera
+# Docker instaluje zależności sam przez pip
+.venv/
+venv/
+env/
+
+# Pliki konfiguracyjne z sekretami — nie trafiają do obrazu
+.env
+
+# Cache Pythona
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Foldery testowe i developerskie
+tests/
+.pytest_cache/
+
+# Kubernetes — nie potrzebne w obrazie
+k8s/
+
+# Dokumentacja
+README.md
+*.md
+
+# Git
+.git/
+.gitignore
+
+# Pliki edytora
+.vscode/
+*.swp
+*.swo
+
+# Uploady — montowane jako volume, nie kopiowane do obrazu
+uploads/
+
+# Dane Qdrant
+qdrant_data/
+
+# Logi
+*.log

@@ -1,0 +1,27 @@
+# Sekrety — NIGDY nie commituj .env z prawdziwym kluczem API
+.env
+
+# Środowisko wirtualne
+.venv/
+venv/
+
+# Cache Pythona
+__pycache__/
+*.pyc
+*.pyo
+
+# Uploady użytkowników
+uploads/
+
+# Dane Qdrant
+qdrant_data/
+
+# VS Code
+.vscode/
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# Logi
+*.log

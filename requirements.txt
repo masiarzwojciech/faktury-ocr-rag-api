@@ -1,0 +1,31 @@
+# --- Web framework ---
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# --- Pydantic ---
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# --- HTTP client (do Groq i Ollama API) ---
+httpx==0.27.2
+
+# --- Groq SDK ---
+groq==0.11.0
+
+# --- Embeddings (lokalne) ---
+sentence-transformers==3.1.1
+
+# --- Baza wektorowa ---
+qdrant-client==1.11.3
+
+# --- Obsługa obrazów ---
+Pillow==10.4.0
+
+# --- Zmienne środowiskowe ---
+python-dotenv==1.0.1
+
+# --- Upload plików w FastAPI ---
+python-multipart==0.0.12
+
+# --- Utilities ---
+uuid==1.30
