@@ -1,0 +1,64 @@
+# Deployment dla naszego API — osobny od Qdrant.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: faktury
+  labels:
+    app: faktury-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: faktury-api
+  template:
+    metadata:
+      labels:
+        app: faktury-api
+    spec:
+      containers:
+        - name: faktury-api
+          # Używamy obrazu zbudowanego lokalnie w Minikube
+          image: faktury-api:latest
+          # Never — nie próbuj pobierać obrazu z internetu
+          # używamy lokalnego obrazu załadowanego do Minikube
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          # Zmienne środowiskowe z ConfigMap
+          envFrom:
+            - configMapRef:
+                name: faktury-config
+          # Klucz API z Secret
+          env:
+            - name: GROQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: faktury-secret
+                  key: groq-api-key
+          # Health check
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "200m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: uploads-storage
+              mountPath: /app/uploads
+      volumes:
+        - name: uploads-storage
+          emptyDir: {}

@@ -1,0 +1,18 @@
+# Service udostępnia Qdrant wewnątrz klastra.
+# Typ ClusterIP — dostępny tylko wewnątrz klastra (dla API).
+apiVersion: v1
+kind: Service
+metadata:
+  name: qdrant-service
+  namespace: faktury
+spec:
+  selector:
+    app: qdrant
+  ports:
+    - name: http
+      port: 6333
+      targetPort: 6333
+    - name: grpc
+      port: 6334
+      targetPort: 6334
+  type: ClusterIP

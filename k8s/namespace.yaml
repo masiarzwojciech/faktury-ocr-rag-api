@@ -1,0 +1,6 @@
+# Namespace to izolowana przestrzeń w klastrze Kubernetes.
+# Wszystkie nasze zasoby będą w namespace "faktury".
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: faktury

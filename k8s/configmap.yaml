@@ -1,0 +1,23 @@
+# ConfigMap przechowuje konfigurację aplikacji jako zmienne środowiskowe.
+# Używamy go do wartości które NIE są sekretami.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: faktury-config
+  namespace: faktury
+data:
+  VLM_PROVIDER: "groq"
+  LLM_PROVIDER: "groq"
+  GROQ_VLM_MODEL: "meta-llama/llama-4-scout-17b-16e-instruct"
+  GROQ_LLM_MODEL: "llama-3.3-70b-versatile"
+  QDRANT_HOST: "qdrant-service"
+  QDRANT_PORT: "6333"
+  QDRANT_COLLECTION_NAME: "documents"
+  EMBEDDING_MODEL: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8000"
+  UPLOAD_DIR: "uploads"
+  MAX_FILE_SIZE_MB: "10"
+  OLLAMA_BASE_URL: "http://host.docker.internal:11434"
+  OLLAMA_VLM_MODEL: "qwen2-vl"
+  OLLAMA_LLM_MODEL: "mistral:7b"

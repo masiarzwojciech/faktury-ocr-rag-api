@@ -1,0 +1,16 @@
+# Service udostępnia API na zewnątrz klastra.
+# Typ NodePort — dostępny z przeglądarki przez minikube service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: faktury-api-service
+  namespace: faktury
+spec:
+  selector:
+    app: faktury-api
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+      nodePort: 30800
+  type: NodePort
