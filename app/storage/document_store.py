@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from app.models.schemas import DocumentStatus, InvoiceData
 
@@ -14,8 +14,8 @@ class DocumentRecord:
         self.document_id: str = str(uuid.uuid4())
         self.filename: str = filename
         self.status: DocumentStatus = DocumentStatus.QUEUED
-        self.created_at: datetime = datetime.utcnow()
-        self.updated_at: datetime = datetime.utcnow()
+        self.created_at: datetime = datetime.now(timezone.utc)
+        self.updated_at: datetime = datetime.now(timezone.utc)
 
         # Wypełniane po zakończeniu OCR/VLM
         self.extracted_text: Optional[str] = None
@@ -30,22 +30,22 @@ class DocumentRecord:
 
     def set_processing(self) -> None:
         self.status = DocumentStatus.PROCESSING
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now(timezone.utc)
 
     def set_completed(self, extracted_text: str, invoice_data: Optional[InvoiceData] = None) -> None:
         self.status = DocumentStatus.COMPLETED
         self.extracted_text = extracted_text
         self.invoice_data = invoice_data
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now(timezone.utc)
 
     def set_failed(self, error_message: str) -> None:
         self.status = DocumentStatus.FAILED
         self.error_message = error_message
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now(timezone.utc)
 
     def set_indexed(self) -> None:
         self.indexed = True
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now(timezone.utc)
 
 
 class DocumentStore:
