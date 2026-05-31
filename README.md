@@ -325,3 +325,31 @@ minikube service faktury-api-service
 
 Projekt wykorzystuje dataset faktur:
 [katanaml-org/invoices-donut-data-v1](https://huggingface.co/datasets/katanaml-org/invoices-donut-data-v1)
+
+Dataset zawiera obrazy faktur w formacie Parquet. Obrazy można wyciągnąć
+i przesłać do API następującym skryptem:
+
+```python
+from datasets import load_dataset
+from PIL import Image
+import io
+
+# Pobierz dataset
+dataset = load_dataset("katanaml-org/invoices-donut-data-v1", split="test")
+
+# Zapisz pierwszy obraz do pliku
+image = dataset[0]["image"]
+image.save("faktura_0.jpg")
+print("Zapisano faktura_0.jpg")
+```
+
+Instalacja biblioteki:
+```bash
+pip install datasets
+```
+
+Następnie prześlij obraz do API:
+```bash
+curl -X POST http://localhost:8000/documents/upload \
+  -F "file=@faktura_0.jpg"
+```

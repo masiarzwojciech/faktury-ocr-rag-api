@@ -26,10 +26,3 @@ python-dotenv==1.0.1
 
 # --- Upload plików w FastAPI ---
 python-multipart==0.0.12
-
-# --- Utilities ---
-uuid==1.30
-
-# --- Testy ---
-pytest==8.3.3
-pytest-asyncio==0.24.0
